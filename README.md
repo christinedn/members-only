@@ -26,17 +26,13 @@ $ git clone git@github.com:christinedn/members-only.git
 
 # Go into the repository
 $ cd members-only
-
 ```
 
 ### Getting the server ready
 
 ```
-
 # Install dependencies
-
 $ npm install
-
 ```
 
 ### Setting up environment variables
@@ -49,5 +45,5 @@ $ npm install
 # Start the server
 $ npm start
 ```
-#
+
 
