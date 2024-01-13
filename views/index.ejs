@@ -1,0 +1,46 @@
+<html lang="en">
+<%- include("./partials/header.ejs") %>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+
+<body>
+  <%- include("./partials/nav.ejs") %>
+  <% if (posts && posts.length > 0) { %>
+    <% posts.forEach(post => { %>
+      <div class="posts content">
+        <h3 class="title"><%= post.title %></h3>
+        <p class="description"> <%= post.message %> </p>
+
+
+        <p class="created-at"> Created at: <%= (user && user.isMember) ? post.createdAt : 'Hidden' %> </p>
+        <p class="author"> Author: <%= (user && user.isMember) ? post.author : 'Hidden' %> </p>
+        <% if (user && user.isAdmin) { %>
+          <div class="icon-container">
+            <a class="delete" data-id="<%= post._id %>">
+              <img src="/images/trashcan.svg" alt="trash icon">
+            </a>
+          </div>
+        <% } %>
+      </div>
+
+    <% }) %>
+  <% } else { %>
+    <p>There are no posts to display...</p>
+  <% } %>
+
+    <script>
+      // delete post
+      const trashcan = document.querySelector('a.delete')
+      trashcan.addEventListener('click', (e) => {
+        const endpoint = `${trashcan.dataset.id}`
+
+        fetch(endpoint, {
+          method: 'DELETE'
+        })
+        .then((response) => response.json())
+        .then((data) => window.location.href = data.redirect)
+        .catch(err => console.log(err))
+      })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<html lang="en">
+<%- include("./partials/header.ejs") %>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+
+<body>
+  <%- include("./partials/nav.ejs") %>
+  <div class="secret-password content">
+    <form id="member-secret-password-form" action="/member-secret-password" method="PUT">
+        <label for="member-secret-password">Enter secret password to become a member: </label>
+        <input type="password" id="member-secret-password" name="member-secret-password" required>
+        <button>Become a member</button>
+    </form>
+    <form id="admin-secret-password-form" action="/admin-secret-password" method="PUT">
+        <label for="admin-secret-password">Enter secret password to become an admin: </label>
+        <input type="password" id="admin-secret-password" name="admin-secret-password" required>
+      <button>Become an admin</button>
+      </form>
+  </div>
+
+  <script>
+    // becoming a member
+    document.getElementById('member-secret-password-form').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const password = document.getElementById('member-secret-password').value;
+      const response = await fetch('/member-secret-password', {
+        method: 'PUT',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        // send password to server
+        body: JSON.stringify({ password }),
+        });
+      const result = await response.json();
+      if (response.ok) {
+        alert(result.message); 
+      } else {
+        alert(result.error); 
+      }
+    });
+
+    // becoming an admin
+    document.getElementById('admin-secret-password-form').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const password = document.getElementById('admin-secret-password').value;
+      const response = await fetch('/admin-secret-password', {
+        method: 'PUT',
+        headers: {
+        'Content-Type': 'application/json',
+      },
+      // send password to server
+        body: JSON.stringify({ password }),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        alert(result.message); 
+      } else {
+        alert(result.error); 
+      }
+    });
+  </script>
+  
+</body>
+
+</html>

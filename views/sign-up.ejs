@@ -1,0 +1,63 @@
+<html lang="en">
+<%- include("./partials/header.ejs") %>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+
+<body>
+    <%- include("./partials/nav.ejs") %>
+    <div class="sign-up content">
+        <form id="sign-up-form" action="/sign-up" method="POST">
+            <label for="firstName">First name:</label>
+            <input type="text" id="first-name" name="firstName" required>
+            <label for="lastName">Last name:</label>
+            <input type="text" id="last-name" name="lastName" required>
+            <label for="username">Username: </label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <label for="passwordConfirmation">Confirm password</label>
+            <input type="password" id="password-confirmation" name="passwordConfirmation" required>
+
+          <button>Sign up</button>
+        </form>
+      </div>
+
+      <script>
+        // check if user already exists, or if passwords match
+        const handleSignUp = async () => {
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const passwordConfirmation = document.getElementById('password-confirmation').value;
+    
+            const response = await fetch('/sign-up', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  firstName,
+                  lastName,
+                  username,
+                  password,
+                  passwordConfirmation,
+              }),
+            });
+
+            if (response.ok) {
+              alert("Account created")
+              window.location.href = '/'
+            } else {
+              const { errors } = await response.json();
+              alert(`${errors[0].msg}`);
+            }
+        };
+    
+        document.getElementById('sign-up-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            handleSignUp();
+        });
+    </script>
+</body>
+
+</html>

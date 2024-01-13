@@ -1,0 +1,17 @@
+<html lang="en">
+<%- include("./partials/header.ejs") %>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+
+<body>
+    <%- include("./partials/nav.ejs") %>
+    <div class="profile content">
+        <p>First name: <%= user.firstName %> </p>
+        <p>Last name: <%= user.lastName %> </p>
+        <p>Username: <%= user.username %></p>
+        <p>Member: <%= user.isMember %></p>
+        <p>Admin: <%= user.isAdmin %></p>
+    </div>
+    <a href="/member-admin">Become a member or admin by clicking here</a>
+</body>
+
+</html>

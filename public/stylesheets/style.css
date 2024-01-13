@@ -1,0 +1,62 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+/* nav  */
+nav {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+/* form */
+form {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 20%;
+  gap: 10px;
+  margin: 10px;
+  position: relative;
+  top: 13%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+button {
+  background: none;
+  cursor: pointer;
+}
+
+/* posts content */
+.posts {
+  position: relative;
+}
+
+.icon-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  padding: 8px;
+}
+
+.delete:hover {
+  cursor: pointer;
+}
